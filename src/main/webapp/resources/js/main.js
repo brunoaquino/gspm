@@ -1,4 +1,4 @@
-var modulo = angular.module('csAdmin', ['ngRoute']);
+var modulo = angular.module('gspmModulo', ['ngRoute']);
 var usuario; 
 modulo.config(function($routeProvider, $locationProvider) {
 
@@ -8,7 +8,7 @@ modulo.config(function($routeProvider, $locationProvider) {
 	});
 
 	$routeProvider.when('/dashBoard', {
-		templateUrl: 'controleDeServicoAngularJs/views/dashBoardTemplate.jsp'
+		templateUrl: 'gspm/views/dm/dashBoardTemplate.jsp'
 	});
 	
 	$routeProvider.when('/cadastroDeCliente', {

@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang="pt-br" ng-app="csAdmin">
+<html lang="pt-br" ng-app="gspmModulo">
 
 <head>
     <meta charset="utf-8">
@@ -31,7 +31,7 @@
 	
 	<script src="../resources/js/main.js"></script>
 	
-	<script src="../resources/js/controllers/login-controller.js"></script>
+	<script src="../resources/js/controllersPublic/login-controller.js"></script>
 
 </head>
 

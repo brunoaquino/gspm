@@ -24,7 +24,7 @@ public class UsuarioRepositoryHibernate extends RepositoryBase implements Usuari
 		Criteria criteria = sessao.createCriteria(Usuario.class);
 		criteria.add(Restrictions.eq("login", usuario.getLogin()));
 		criteria.add(Restrictions.eq("senha", usuario.getSenha()));
-
+		
 		Usuario usuarioAutenticado = (Usuario) criteria.uniqueResult();
 		sessao.close();
 

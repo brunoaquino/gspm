@@ -2,7 +2,7 @@ SET @OLD_UNIQUE_CHECKS=@@UNIQUE_CHECKS, UNIQUE_CHECKS=0;
 SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
-CREATE TABLE IF NOT EXISTS `db_controle_servico`.`cliente` (
+CREATE TABLE IF NOT EXISTS `db_gspm`.`cliente` (
   `cliente_id` INT(11) NOT NULL,
   `text_nome` VARCHAR(200) NULL DEFAULT NULL,
   `text_cpf_cnpj` VARCHAR(20) NULL DEFAULT NULL,
@@ -24,7 +24,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `db_controle_servico`.`funcionario` (
+CREATE TABLE IF NOT EXISTS `db_gspm`.`funcionario` (
   `funcionario_id` INT(11) NOT NULL,
   `text_nome` VARCHAR(200) NULL DEFAULT NULL,
   `text_cpf` VARCHAR(11) NULL DEFAULT NULL,
@@ -45,7 +45,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `db_controle_servico`.`servico` (
+CREATE TABLE IF NOT EXISTS `db_gspm`.`servico` (
   `servico_id` INT(11) NOT NULL,
   `doub_preco` DOUBLE NULL DEFAULT NULL,
   `text_nome` VARCHAR(200) NULL DEFAULT NULL,
@@ -55,7 +55,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `db_controle_servico`.`ordemDeServico` (
+CREATE TABLE IF NOT EXISTS `db_gspm`.`ordemDeServico` (
   `ordemdeservico_id` INT(11) NOT NULL,
   `funcionario_id` INT(11) NOT NULL,
   `cliente_id` INT(11) NOT NULL,
@@ -68,19 +68,19 @@ CREATE TABLE IF NOT EXISTS `db_controle_servico`.`ordemDeServico` (
   INDEX `fk_ordemDeServico_cliente1_idx` (`cliente_id` ASC),
   CONSTRAINT `fk_ordemDeServico_funcionario1`
     FOREIGN KEY (`funcionario_id`)
-    REFERENCES `db_controle_servico`.`funcionario` (`funcionario_id`)
+    REFERENCES `db_gspm`.`funcionario` (`funcionario_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ordemDeServico_cliente1`
     FOREIGN KEY (`cliente_id`)
-    REFERENCES `db_controle_servico`.`cliente` (`cliente_id`)
+    REFERENCES `db_gspm`.`cliente` (`cliente_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `db_controle_servico`.`historicoOS` (
+CREATE TABLE IF NOT EXISTS `db_gspm`.`historicoOS` (
   `historicoOS_id` INT(11) NOT NULL,
   `dataDeCadastro` DATETIME NOT NULL,
   `ordemdeservico_id` INT(11) NOT NULL,
@@ -88,33 +88,33 @@ CREATE TABLE IF NOT EXISTS `db_controle_servico`.`historicoOS` (
   INDEX `fk_historicoOS_ordemDeServico1_idx` (`ordemdeservico_id` ASC),
   CONSTRAINT `fk_historicoOS_ordemDeServico1`
     FOREIGN KEY (`ordemdeservico_id`)
-    REFERENCES `db_controle_servico`.`ordemDeServico` (`ordemdeservico_id`)
+    REFERENCES `db_gspm`.`ordemDeServico` (`ordemdeservico_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `db_controle_servico`.`funcionario_servico` (
+CREATE TABLE IF NOT EXISTS `db_gspm`.`funcionario_servico` (
   `funcionario_id` INT(11) NOT NULL,
   `servico_id` INT(11) NOT NULL,
   INDEX `fk_funcionario_servico_funcionario1_idx` (`funcionario_id` ASC),
   INDEX `fk_funcionario_servico_servico1_idx` (`servico_id` ASC),
   CONSTRAINT `fk_funcionario_servico_funcionario1`
     FOREIGN KEY (`funcionario_id`)
-    REFERENCES `db_controle_servico`.`funcionario` (`funcionario_id`)
+    REFERENCES `db_gspm`.`funcionario` (`funcionario_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_funcionario_servico_servico1`
     FOREIGN KEY (`servico_id`)
-    REFERENCES `db_controle_servico`.`servico` (`servico_id`)
+    REFERENCES `db_gspm`.`servico` (`servico_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `db_controle_servico`.`usuario` (
+CREATE TABLE IF NOT EXISTS `db_gspm`.`usuario` (
   `usuario_id` INT(11) NOT NULL,
   `text_email` VARCHAR(200) NOT NULL,
   `text_senha` VARCHAR(12) NOT NULL,
@@ -128,33 +128,33 @@ CREATE TABLE IF NOT EXISTS `db_controle_servico`.`usuario` (
   INDEX `fk_usuario_empresa1_idx` (`empresa_id` ASC),
   CONSTRAINT `fk_usuario_empresa1`
     FOREIGN KEY (`empresa_id`)
-    REFERENCES `db_controle_servico`.`empresa` (`empresa_id`)
+    REFERENCES `db_gspm`.`empresa` (`empresa_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `db_controle_servico`.`ordemDeServico_servico` (
+CREATE TABLE IF NOT EXISTS `db_gspm`.`ordemDeServico_servico` (
   `servico_id` INT(11) NOT NULL,
   `ordemdeservico_id` INT(11) NOT NULL,
   INDEX `fk_ordemDeServico_servico_servico1_idx` (`servico_id` ASC),
   INDEX `fk_ordemDeServico_servico_ordemDeServico1_idx` (`ordemdeservico_id` ASC),
   CONSTRAINT `fk_ordemDeServico_servico_servico1`
     FOREIGN KEY (`servico_id`)
-    REFERENCES `db_controle_servico`.`servico` (`servico_id`)
+    REFERENCES `db_gspm`.`servico` (`servico_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION,
   CONSTRAINT `fk_ordemDeServico_servico_ordemDeServico1`
     FOREIGN KEY (`ordemdeservico_id`)
-    REFERENCES `db_controle_servico`.`ordemDeServico` (`ordemdeservico_id`)
+    REFERENCES `db_gspm`.`ordemDeServico` (`ordemdeservico_id`)
     ON DELETE NO ACTION
     ON UPDATE NO ACTION)
 ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-CREATE TABLE IF NOT EXISTS `db_controle_servico`.`empresa` (
+CREATE TABLE IF NOT EXISTS `db_gspm`.`empresa` (
   `empresa_id` INT(11) NOT NULL,
   `text_nomeFantasia` VARCHAR(200) NOT NULL,
   `text_razaoSocial` VARCHAR(200) NOT NULL,
@@ -173,7 +173,7 @@ DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
 
-INSERT INTO `db_controle_servico`.`usuario` (`usuario_id`, `text_email`, `text_senha`, `bool_ativo`, `text_login`, `bool_admin`, `dataDeCadastro`, `dataDeAlteracao`) VALUES ('1', 'bruno-smv2@hotmail.com', '1', '1', 'admin', '1', '2015-09-11 16:17:25', '2015-09-11 16:17:25');
+INSERT INTO `db_gspm`.`usuario` (`usuario_id`, `text_email`, `text_senha`, `bool_ativo`, `text_login`, `bool_admin`, `dataDeCadastro`, `dataDeAlteracao`) VALUES ('1', 'bruno-smv2@hotmail.com', '1', '1', 'admin', '1', '2015-09-11 16:17:25', '2015-09-11 16:17:25');
 
 
 --SET FOREIGN_KEY_CHECKS = 0;

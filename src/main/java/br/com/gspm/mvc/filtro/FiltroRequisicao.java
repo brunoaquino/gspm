@@ -33,22 +33,14 @@ public class FiltroRequisicao implements Filter {
 		String urlDeAcesso = req.getRequestURI();
 		if(urlDeAcesso.equals("/gspm/")){
 			if(isUsuarioLogado(req)){
-				resp.sendRedirect("views/index.jsp");
+				resp.sendRedirect("views/dm/index.jsp");
 				return;
 			}else{
 				resp.sendRedirect("views/login.jsp");
 				return;
 			}
 		}
-//		if(urlDeAcesso.equals("/controleDeServicoAngularJs/")){
-//			if(isUsuarioLogado(req)){
-//				resp.sendRedirect("views/index.jsp");
-//				return;
-//			}else{
-//				resp.sendRedirect("views/login.jsp");
-//				return;
-//			}
-//		}
+		
 		if (urlDeAcesso.contains("/resources/") || urlDeAcesso.contains("/rest")) {
 			chain.doFilter(request, resp);
 			return;

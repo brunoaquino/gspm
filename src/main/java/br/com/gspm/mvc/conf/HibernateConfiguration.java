@@ -49,7 +49,7 @@ public class HibernateConfiguration {
 		properties.put("hibernate.show_sql",env.getProperty("hibernate.show_sql"));
 		properties.put("current_session_context_class", "thread");
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
-		factory.setPackagesToScan(new String[] { "br.com.cs.mvc.model" });
+		factory.setPackagesToScan(new String[] { "br.com.gspm.mvc.model" });
 		factory.setDataSource(getDataSource());
 		factory.setHibernateProperties(properties);
 		factory.afterPropertiesSet();
