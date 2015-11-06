@@ -19,6 +19,7 @@ public class WebAppInitializer implements WebApplicationInitializer {
 	public void onStartup(ServletContext container) throws ServletException {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.getEnvironment().setDefaultProfiles("homologacao");
+		
 		rootContext.scan("br.com.jsbse.gspm.mvc");
 
 		container.addListener(new ContextLoaderListener(rootContext));
