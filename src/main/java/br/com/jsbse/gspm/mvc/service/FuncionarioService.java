@@ -7,7 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
-import br.com.jsbse.gspm.mvc.exeptions.MensagemDeErroExeption;
+import br.com.jsbse.arquitetura.servico.ServicoBase;
 import br.com.jsbse.gspm.mvc.model.Funcionario;
 import br.com.jsbse.gspm.mvc.repositories.FuncionarioRepository;
 
@@ -26,10 +26,10 @@ public class FuncionarioService extends ServicoBase {
 
 	private void validaFuncionario(Funcionario funcionario) {
 		if (funcionario.getNome() == null) {
-			throw new MensagemDeErroExeption("Nome é Obrigatório");
+//			throw new MensagemDeErroExeption("Nome é Obrigatório");
 		}
 		if (funcionario.getCpf() == null) {
-			throw new MensagemDeErroExeption("CPF é Obrigatório");
+//			throw new MensagemDeErroExeption("CPF é Obrigatório");
 		}
 	}
 

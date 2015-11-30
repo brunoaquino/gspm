@@ -10,7 +10,8 @@ import org.springframework.web.servlet.config.annotation.WebMvcConfigurerAdapter
 import br.com.jsbse.gspm.mvc.filtro.FiltroMigracao;
 
 @EnableWebMvc
-@ComponentScan(basePackages = { "br.com.jsbse.gspm.mvc" })
+@ComponentScan(basePackages = { "br.com.jsbse" })
+//@ComponentScan(basePackages = { "br.com.jsbse.gspm.mvc" })
 @Configuration
 public class AppWebConfiguration extends WebMvcConfigurerAdapter {
 

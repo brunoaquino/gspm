@@ -8,9 +8,8 @@ import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
-import br.com.jsbse.gspm.mvc.exeptions.ExcecaoInfraestrutura;
-import br.com.jsbse.gspm.mvc.exeptions.ExcecaoUsuarioNaoAutenticado;
-import br.com.jsbse.gspm.mvc.exeptions.MensagemDeErroExeption;
+import br.com.jsbse.arquitetura.excecao.ExcecaoInfraestrutura;
+import br.com.jsbse.arquitetura.excecao.ExcecaoUsuarioNaoAutenticado;
 import br.com.jsbse.gspm.mvc.model.Erro;
 
 public class ControladorBase {
@@ -40,16 +39,16 @@ public class ControladorBase {
 		return erro;
 	}
 
-	@ExceptionHandler(value = { MensagemDeErroExeption.class })
-	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
-	public @ResponseBody Erro capturaExcecao(MensagemDeErroExeption ex, HttpServletRequest request) {
-		ex.printStackTrace();
-
-		Erro erro = new Erro();
-		erro.setId(1);
-		erro.setMensagemDeErro(ex.getMessage());
-		return erro;
-	}
+//	@ExceptionHandler(value = { MensagemDeErroExeption.class })
+//	@ResponseStatus(value = HttpStatus.BAD_REQUEST)
+//	public @ResponseBody Erro capturaExcecao(MensagemDeErroExeption ex, HttpServletRequest request) {
+//		ex.printStackTrace();
+//
+//		Erro erro = new Erro();
+//		erro.setId(1);
+//		erro.setMensagemDeErro(ex.getMessage());
+//		return erro;
+//	}
 	
 	@ExceptionHandler(value = { RuntimeException.class })
 	@ResponseStatus(value = HttpStatus.BAD_REQUEST)

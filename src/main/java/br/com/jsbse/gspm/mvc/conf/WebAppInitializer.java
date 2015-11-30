@@ -20,7 +20,8 @@ public class WebAppInitializer implements WebApplicationInitializer {
 		AnnotationConfigWebApplicationContext rootContext = new AnnotationConfigWebApplicationContext();
 		rootContext.getEnvironment().setDefaultProfiles("homologacao");
 		
-		rootContext.scan("br.com.jsbse.gspm.mvc");
+		rootContext.scan("br.com.jsbse");
+//		rootContext.scan("br.com.jsbse.gspm.mvc");
 
 		container.addListener(new ContextLoaderListener(rootContext));
 

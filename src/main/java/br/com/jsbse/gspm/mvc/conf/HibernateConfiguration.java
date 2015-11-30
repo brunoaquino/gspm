@@ -16,6 +16,9 @@ import org.springframework.orm.hibernate4.HibernateTransactionManager;
 import org.springframework.orm.hibernate4.LocalSessionFactoryBean;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+import br.com.jsbse.arquitetura.integracao.DAO;
+import br.com.jsbse.integracao.hibernate.DAOHibernate4;
+
 @Configuration
 @EnableTransactionManagement
 @PropertySource("classpath:db.properties")
@@ -34,10 +37,16 @@ public class HibernateConfiguration {
 		return ds;
 	}
 
+	@Bean(name = "baseDAO")
+	public DAO getBaseDao() {
+		return new DAOHibernate4();
+	}
+
 	@Autowired
 	@Bean
 	public HibernateTemplate getHibernateTemplate(SessionFactory sessionFactory) {
-		HibernateTemplate hibernateTemplate = new HibernateTemplate(sessionFactory);
+		HibernateTemplate hibernateTemplate = new HibernateTemplate(
+				sessionFactory);
 		SpringContext.setTemplate(hibernateTemplate);
 		return hibernateTemplate;
 	}
@@ -46,10 +55,13 @@ public class HibernateConfiguration {
 	public SessionFactory getSessionFactory() throws Exception {
 		Properties properties = new Properties();
 		properties.put("hibernate.dialect", env.getProperty("jdbc.dialect"));
-		properties.put("hibernate.show_sql",env.getProperty("hibernate.show_sql"));
+		properties.put("hibernate.show_sql",
+				env.getProperty("hibernate.show_sql"));
 		properties.put("current_session_context_class", "thread");
 		LocalSessionFactoryBean factory = new LocalSessionFactoryBean();
-		factory.setPackagesToScan(new String[] { "br.com.jsbse.gspm.mvc.model" });
+		factory.setPackagesToScan(new String[] { "br.com.jsbse" });
+		// factory.setPackagesToScan(new String[] {
+		// "br.com.jsbse.gspm.mvc.model" });
 		factory.setDataSource(getDataSource());
 		factory.setHibernateProperties(properties);
 		factory.afterPropertiesSet();

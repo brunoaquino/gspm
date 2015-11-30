@@ -7,8 +7,8 @@ import javax.annotation.Resource;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.jsbse.gspm.mvc.exeptions.ExcecaoUsuarioNaoAutenticado;
-import br.com.jsbse.gspm.mvc.exeptions.MensagemDeErroExeption;
+import br.com.jsbse.arquitetura.excecao.ExcecaoUsuarioNaoAutenticado;
+import br.com.jsbse.arquitetura.servico.ServicoBase;
 import br.com.jsbse.gspm.mvc.infra.Autenticador;
 import br.com.jsbse.gspm.mvc.model.Usuario;
 import br.com.jsbse.gspm.mvc.repositories.ClienteRepository;
@@ -74,16 +74,16 @@ public class UsuarioService extends ServicoBase {
 				.getEmail());
 
 		if (usuarioEncontrado != null) {
-			throw new MensagemDeErroExeption("Usuário com o email: '"
-					+ usuario.getEmail() + "' já foi cadastrado");
+//			throw new MensagemDeErroExeption("Usuário com o email: '"
+//					+ usuario.getEmail() + "' já foi cadastrado");
 		}
 
 		usuarioEncontrado = usuarioRepository.getUsuarioPorLogin(usuario
 				.getLogin());
 
 		if (usuarioEncontrado != null) {
-			throw new MensagemDeErroExeption("Usuário com o login: '"
-					+ usuario.getLogin() + "' já foi cadastrado");
+//			throw new MensagemDeErroExeption("Usuário com o login: '"
+//					+ usuario.getLogin() + "' já foi cadastrado");
 		}
 	}
 
@@ -94,16 +94,16 @@ public class UsuarioService extends ServicoBase {
 				.getEmail());
 
 		if (usuariosEncontrados.size() > 1) {
-			throw new MensagemDeErroExeption("Usuário com o email: '"
-					+ usuario.getEmail() + "' já foi cadastrado");
+//			throw new MensagemDeErroExeption("Usuário com o email: '"
+//					+ usuario.getEmail() + "' já foi cadastrado");
 		}
 
 		usuariosEncontrados = usuarioRepository.getUsuariosPorLogin(usuario
 				.getLogin());
 
 		if (usuariosEncontrados.size() > 1) {
-			throw new MensagemDeErroExeption("Usuário com o login: '"
-					+ usuario.getLogin() + "' já foi cadastrado");
+//			throw new MensagemDeErroExeption("Usuário com o login: '"
+//					+ usuario.getLogin() + "' já foi cadastrado");
 		}
 	}
 

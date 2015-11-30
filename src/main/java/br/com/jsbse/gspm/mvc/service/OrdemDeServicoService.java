@@ -7,6 +7,7 @@ import javax.annotation.Resource;
 
 import org.springframework.stereotype.Service;
 
+import br.com.jsbse.arquitetura.servico.ServicoBase;
 import br.com.jsbse.gspm.mvc.model.FiltroOrdemDeServico;
 import br.com.jsbse.gspm.mvc.model.OrdemDeServico;
 import br.com.jsbse.gspm.mvc.repositories.OrdemDeServicoRepository;
