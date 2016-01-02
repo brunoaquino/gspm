@@ -13,8 +13,9 @@ function trataMensagemDeErro(msg) {
 	try{
 		mensagem = JSON.parse(msg.responseText);
 		
-		if (msg.responseText != undefined) {
-			alert(mensagem.mensagemDeErro);
+//		if (msg.responseText != undefined) {
+		if (mensagem.erro[0] != undefined) {
+			alert(mensagem.erro[0].texto);
 			return;
 		}
 		
