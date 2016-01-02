@@ -2,46 +2,34 @@ package br.com.jsbse.gspm.mvc.service;
 
 import java.util.List;
 
-import javax.annotation.Resource;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import br.com.jsbse.arquitetura.excecao.ExcecaoUsuarioNaoAutenticado;
 import br.com.jsbse.arquitetura.servico.ServicoBase;
 import br.com.jsbse.gspm.mvc.infra.Autenticador;
 import br.com.jsbse.gspm.mvc.model.Usuario;
-import br.com.jsbse.gspm.mvc.repositories.ClienteRepository;
-import br.com.jsbse.gspm.mvc.repositories.FuncionarioRepository;
-import br.com.jsbse.gspm.mvc.repositories.OrdemDeServicoRepository;
 import br.com.jsbse.gspm.mvc.repositories.UsuarioRepository;
+import br.com.jsbse.jsbse.aplicacao.Aplicacao;
 
 @Service
 public class UsuarioService extends ServicoBase {
-
-	@Resource(name = "usuarioRepository")
-	public UsuarioRepository usuarioRepository;
-
-	@Resource(name = "ordemDeServicoRepository")
-	public OrdemDeServicoRepository osRepository;
-
-	@Resource(name = "funcionarioRepository")
-	public FuncionarioRepository funcionarioRepository;
-
-	@Resource(name = "clienteRepository")
-	public ClienteRepository clienteRepository;
-
 	@Autowired
 	Autenticador autenticador;
+	
+	private UsuarioRepository getRepositorioUsuario() {
+		 return Aplicacao.get().getRepositorio(UsuarioRepository.class);
+	}
 
 	public Usuario autenticaUsuario(Usuario usuario) {
-		Usuario usuarioAutenticado = usuarioRepository.getUsuarioPeloLoginESenha(usuario);
+		Usuario usuarioAutenticado = getRepositorioUsuario().getUsuarioPeloLoginESenha(usuario);
+		
 		if (usuarioAutenticado == null) {
-			throw new ExcecaoUsuarioNaoAutenticado("Login ou Senha inválido");
-		} else {
-			autenticador.autenticaUsuarioNaSessao(usuarioAutenticado);
-			return usuarioAutenticado;
-		}
+			acrescentaMensagemDeErro("Login ou Senha inválido");
+		} 
+		levantaExcecaoSeTemErro();
+		
+		autenticador.autenticaUsuarioNaSessao(usuarioAutenticado);
+		return usuarioAutenticado;
 	}
 
 	public void logout() {
@@ -54,23 +42,23 @@ public class UsuarioService extends ServicoBase {
 		if (usuario.getId() == null) {
 			usuario.setAtivo(true);
 		}
-		usuarioRepository.salva(usuario);
+		getRepositorioUsuario().salva(usuario);
 	}
 
 	public void atualiza(Usuario usuario) {
 		validaUsuarioAtualiza(usuario);
 
-		usuarioRepository.atualiza(usuario);
+		getRepositorioUsuario().atualiza(usuario);
 	}
 
 	public List<Usuario> getUsuarios() {
-		return usuarioRepository.getUsuarios();
+		return getRepositorioUsuario().getUsuarios();
 	}
 
 	private void validaUsuarioSalvar(Usuario usuario) {
 		Usuario usuarioEncontrado;
 
-		usuarioEncontrado = usuarioRepository.getUsuarioPorEmail(usuario
+		usuarioEncontrado = getRepositorioUsuario().getUsuarioPorEmail(usuario
 				.getEmail());
 
 		if (usuarioEncontrado != null) {
@@ -78,7 +66,7 @@ public class UsuarioService extends ServicoBase {
 //					+ usuario.getEmail() + "' já foi cadastrado");
 		}
 
-		usuarioEncontrado = usuarioRepository.getUsuarioPorLogin(usuario
+		usuarioEncontrado = getRepositorioUsuario().getUsuarioPorLogin(usuario
 				.getLogin());
 
 		if (usuarioEncontrado != null) {
@@ -90,7 +78,7 @@ public class UsuarioService extends ServicoBase {
 	private void validaUsuarioAtualiza(Usuario usuario) {
 		List<Usuario> usuariosEncontrados;
 
-		usuariosEncontrados = usuarioRepository.getUsuariosPorEmail(usuario
+		usuariosEncontrados = getRepositorioUsuario().getUsuariosPorEmail(usuario
 				.getEmail());
 
 		if (usuariosEncontrados.size() > 1) {
@@ -98,7 +86,7 @@ public class UsuarioService extends ServicoBase {
 //					+ usuario.getEmail() + "' já foi cadastrado");
 		}
 
-		usuariosEncontrados = usuarioRepository.getUsuariosPorLogin(usuario
+		usuariosEncontrados = getRepositorioUsuario().getUsuariosPorLogin(usuario
 				.getLogin());
 
 		if (usuariosEncontrados.size() > 1) {
@@ -108,7 +96,7 @@ public class UsuarioService extends ServicoBase {
 	}
 
 	public void delete(Usuario usuario) {
-		usuarioRepository.exclui(usuario);
+		getRepositorioUsuario().exclui(usuario);
 	}
 
 }

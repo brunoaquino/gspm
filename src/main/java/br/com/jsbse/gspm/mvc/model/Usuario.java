@@ -6,8 +6,6 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
@@ -24,7 +22,7 @@ public class Usuario {
 	private String senha;
 	private boolean ativo;
 	private boolean admin;
-	private Empresa empresa;
+	// private Empresa empresa;
 	private Date dataDeCadastro;
 	private Date dataDeAlteracao;
 
@@ -76,15 +74,15 @@ public class Usuario {
 		this.login = login;
 	}
 
-	@ManyToOne
-	@JoinColumn(name = "empresa_id")
-	public Empresa getEmpresa() {
-		return empresa;
-	}
-
-	public void setEmpresa(Empresa empresa) {
-		this.empresa = empresa;
-	}
+	// @ManyToOne
+	// @JoinColumn(name = "empresa_id")
+	// public Empresa getEmpresa() {
+	// return empresa;
+	// }
+	//
+	// public void setEmpresa(Empresa empresa) {
+	// this.empresa = empresa;
+	// }
 
 	@Column(name = "bool_admin")
 	public boolean isAdmin() {
