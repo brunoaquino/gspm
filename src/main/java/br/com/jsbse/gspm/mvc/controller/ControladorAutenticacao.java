@@ -8,14 +8,14 @@ import org.springframework.web.bind.annotation.RestController;
 
 import br.com.jsbse.arquitetura.controlador.ControladorBase;
 import br.com.jsbse.gspm.mvc.model.Usuario;
-import br.com.jsbse.gspm.mvc.service.UsuarioService;
+import br.com.jsbse.gspm.mvc.service.ServicoUsuario;
 
 @RestController
 @RequestMapping("/rest/autenticacao")
 public class ControladorAutenticacao extends ControladorBase {
 
 	@Autowired
-	UsuarioService service;
+	ServicoUsuario service;
 	
 	@RequestMapping(value = "/autentica", method = RequestMethod.POST)
 	@Transactional

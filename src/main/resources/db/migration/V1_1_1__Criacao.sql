@@ -3,7 +3,7 @@ SET @OLD_FOREIGN_KEY_CHECKS=@@FOREIGN_KEY_CHECKS, FOREIGN_KEY_CHECKS=0;
 SET @OLD_SQL_MODE=@@SQL_MODE, SQL_MODE='TRADITIONAL,ALLOW_INVALID_DATES';
 
 CREATE TABLE IF NOT EXISTS `db_gspm`.`usuario` (
-  `usuario_id` INT(11) NOT NULL,
+  `usuario_id` VARCHAR(32) NOT NULL,
   `text_email` VARCHAR(200) NOT NULL,
   `text_senha` VARCHAR(12) NOT NULL,
   `bool_ativo` TINYINT(4) NOT NULL DEFAULT 1,
@@ -16,7 +16,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO `db_gspm`.`usuario` (`usuario_id`, `text_email`, `text_senha`, `bool_ativo`, `text_login`, `bool_admin`, `dataDeCadastro`, `dataDeAlteracao`) VALUES ('1', 'bruno-smv2@hotmail.com', '1', '1', 'admin', '1', '2015-09-11 16:17:25', '2015-09-11 16:17:25');
+INSERT INTO `db_gspm`.`usuario` (`usuario_id`, `text_email`, `text_senha`, `bool_ativo`, `text_login`, `bool_admin`, `dataDeCadastro`, `dataDeAlteracao`) VALUES ('ecb2d7c422fa4f8cb3b067c3ca77f0e8', 'bruno-smv2@hotmail.com', '1', '1', 'admin', '1', '2015-09-11 16:17:25', '2015-09-11 16:17:25');
 
 
 --SET FOREIGN_KEY_CHECKS = 0;

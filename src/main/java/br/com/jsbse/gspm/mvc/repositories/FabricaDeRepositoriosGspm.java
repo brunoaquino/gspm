@@ -12,12 +12,12 @@ import br.com.jsbse.arquitetura.integracao.Repositorio;
 @Component("fabricaDeRepositorios")
 public class FabricaDeRepositoriosGspm extends FabricaDeRepositorios {
 
-	@Resource(name = "usuarioRepository")
-	public UsuarioRepository usuarioRepository;
+	@Resource(name = "repositoryUsuario")
+	public RepositoryUsuario usuarioRepository;
 
 	@Override
 	protected void doPopulaDefinicoesDeRepositorio(Map<Class<? extends Repositorio>, Repositorio> definicoesDosRepositorios) {
-		definicoesDosRepositorios.put(UsuarioRepository.class, usuarioRepository);
+		definicoesDosRepositorios.put(RepositoryUsuario.class, usuarioRepository);
 	}
 
 }

@@ -12,11 +12,12 @@ import javax.persistence.TemporalType;
 
 import org.hibernate.annotations.GenericGenerator;
 
+import br.com.jsbse.arquitetura.entidade.Entidade;
+
 @Entity
 @Table(name = "usuario")
-public class Usuario {
+public class Usuario extends Entidade<String>{
 
-	private Long id;
 	private String email;
 	private String login;
 	private String senha;
@@ -26,16 +27,16 @@ public class Usuario {
 	private Date dataDeCadastro;
 	private Date dataDeAlteracao;
 
+//	@GenericGenerator(name = "generator", strategy = "increment")
+//	@Column(name = "usuario_id", nullable = false)
+//	@GeneratedValue(generator = "generator")
 	@Id
-	@GenericGenerator(name = "generator", strategy = "increment")
-	@Column(name = "usuario_id", nullable = false)
-	@GeneratedValue(generator = "generator")
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
+	@GeneratedValue(generator = "UUIDGenerator")
+	@GenericGenerator(name = "UUIDGenerator", strategy = "base.util.UUIDGenerator")
+	@Column(name = "usuario_id", length = 32)
+	@Override
+	public String getId() {
+		return super.getId();
 	}
 
 	@Column(name = "text_email")

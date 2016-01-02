@@ -10,7 +10,7 @@ import org.springframework.stereotype.Repository;
 import br.com.jsbse.gspm.mvc.model.Usuario;
 
 @Repository
-public class UsuarioRepositoryHibernate extends RepositoryBase implements UsuarioRepository {
+public class RepositoryUsuarioHibernate extends RepositoryBase implements RepositoryUsuario {
 
 	@Override
 	public List<Usuario> getUsuarios() {

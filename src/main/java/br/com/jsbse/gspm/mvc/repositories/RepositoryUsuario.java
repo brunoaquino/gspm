@@ -5,7 +5,7 @@ import java.util.List;
 import br.com.jsbse.arquitetura.integracao.Repositorio;
 import br.com.jsbse.gspm.mvc.model.Usuario;
 
-public interface UsuarioRepository extends Repositorio{
+public interface RepositoryUsuario extends Repositorio{
 
 	public List<Usuario> getUsuarios();
 
