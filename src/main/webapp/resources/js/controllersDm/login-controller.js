@@ -18,7 +18,7 @@ modulo.controller( 'LoginController', function($scope, $http) {
     	call('http://localhost:8080/gspm/rest/autenticacao/autentica', usuario)
 		.success(function(retorno){
 			usuarioAutenticado = retorno;
-			window.location = "http://localhost:8080/controleDeServicoAngularJs/views/index.jsp";
+			window.location = "http://localhost:8080/gspm/views/index.jsp";
 		})
 		.error(function(msg){
 			trataMensagemDeErro(msg);
