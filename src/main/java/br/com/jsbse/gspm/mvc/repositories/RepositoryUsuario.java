@@ -5,17 +5,11 @@ import java.util.List;
 import br.com.jsbse.arquitetura.integracao.Repositorio;
 import br.com.jsbse.gspm.mvc.model.Usuario;
 
-public interface RepositoryUsuario extends Repositorio{
+public interface RepositoryUsuario extends Repositorio {
 
 	public List<Usuario> getUsuarios();
 
 	public Usuario getUsuarioPeloLoginESenha(Usuario usuario);
-
-	public void salva(Usuario usuario);
-
-	public void atualiza(Usuario usuario);
-
-	public void exclui(Usuario usuario);
 
 	public Usuario getUsuarioPorEmail(String email);
 

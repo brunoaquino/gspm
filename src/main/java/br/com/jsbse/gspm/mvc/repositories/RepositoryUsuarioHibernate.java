@@ -24,26 +24,11 @@ public class RepositoryUsuarioHibernate extends RepositoryBase implements Reposi
 		Criteria criteria = sessao.createCriteria(Usuario.class);
 		criteria.add(Restrictions.eq("login", usuario.getLogin()));
 		criteria.add(Restrictions.eq("senha", usuario.getSenha()));
-		
+
 		Usuario usuarioAutenticado = (Usuario) criteria.uniqueResult();
 		sessao.close();
 
 		return usuarioAutenticado;
-	}
-
-	@Override
-	public void salva(Usuario usuario) {
-		this.hibernateTemplate.save(usuario);
-	}
-
-	@Override
-	public void atualiza(Usuario usuario) {
-		this.hibernateTemplate.update(usuario);
-	}
-
-	@Override
-	public void exclui(Usuario usuario) {
-		this.hibernateTemplate.delete(usuario);
 	}
 
 	@Override
@@ -58,16 +43,18 @@ public class RepositoryUsuarioHibernate extends RepositoryBase implements Reposi
 
 		return usuarioAutenticado;
 	}
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> getUsuariosPorEmail(String email) {
 		Session sessao = getSession();
-		
+
 		Criteria criteria = sessao.createCriteria(Usuario.class);
 		criteria.add(Restrictions.eq("email", email));
-		
+
 		List<Usuario> listaDeUsuarios = (List<Usuario>) criteria.list();
 		sessao.close();
-		
+
 		return listaDeUsuarios;
 	}
 
@@ -83,17 +70,18 @@ public class RepositoryUsuarioHibernate extends RepositoryBase implements Reposi
 
 		return usuarioAutenticado;
 	}
-	
+
+	@SuppressWarnings("unchecked")
 	@Override
 	public List<Usuario> getUsuariosPorLogin(String login) {
 		Session sessao = getSession();
-		
+
 		Criteria criteria = sessao.createCriteria(Usuario.class);
 		criteria.add(Restrictions.eq("login", login));
-		
+
 		List<Usuario> listaDeUsuarios = (List<Usuario>) criteria.list();
 		sessao.close();
-		
+
 		return listaDeUsuarios;
 	}
 }

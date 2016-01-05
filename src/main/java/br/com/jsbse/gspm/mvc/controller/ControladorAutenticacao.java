@@ -16,13 +16,14 @@ public class ControladorAutenticacao extends ControladorBase {
 
 	@Autowired
 	ServicoUsuario service;
-	
+
 	@RequestMapping(value = "/autentica", method = RequestMethod.POST)
 	@Transactional
 	public Usuario autentica(Usuario usuario) {
 		service.autenticaUsuario(usuario);
 		return usuario;
 	}
+
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)
 	public boolean logout() {
 		service.logout();

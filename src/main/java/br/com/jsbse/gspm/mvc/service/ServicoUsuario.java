@@ -13,21 +13,21 @@ import br.com.jsbse.jsbse.aplicacao.Aplicacao;
 public class ServicoUsuario extends ServicoBase {
 	@Autowired
 	Autenticador autenticador;
-	
+
 	private RepositoryUsuario getRepositorioUsuario() {
-		 return Aplicacao.get().getRepositorio(RepositoryUsuario.class);
+		return Aplicacao.get().getRepositorio(RepositoryUsuario.class);
 	}
-	
+
 	public Usuario autenticaUsuario(Usuario usuario) {
 		Usuario usuarioAutenticado = getRepositorioUsuario().getUsuarioPeloLoginESenha(usuario);
-		
+
 		if (usuarioAutenticado == null) {
 			acrescentaMensagemDeErro("Login ou Senha inválido");
-		} 
+		}
 		levantaExcecaoSeTemErro();
-		
+
 		autenticador.autenticaUsuarioNaSessao(usuarioAutenticado);
-		
+
 		return usuarioAutenticado;
 	}
 
