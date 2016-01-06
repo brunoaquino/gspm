@@ -14,6 +14,8 @@ import javax.persistence.Transient;
 import org.hibernate.annotations.GenericGenerator;
 import org.hibernate.annotations.Type;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import br.com.jsbse.arquitetura.entidade.Entidade;
 import br.com.jsbse.gspm.mvc.model.interfaces.UsuarioTipo;
 import br.com.jsbse.gspm.mvc.repositories.RepositoryUsuario;
@@ -29,7 +31,6 @@ public class Usuario extends Entidade<String> {
 	private String login;
 	private String senha;
 	private boolean ativo;
-	private boolean admin;
 	private Date dataDeCadastro;
 	private Date dataDeAlteracao;
 	private TipoUsuario tipo;
@@ -79,15 +80,6 @@ public class Usuario extends Entidade<String> {
 		this.ativo = ativo;
 	}
 
-	@Column(name = "admin")
-	public boolean isAdmin() {
-		return admin;
-	}
-
-	public void setAdmin(boolean admin) {
-		this.admin = admin;
-	}
-
 	@Column(name = "datadecadastro")
 	@Temporal(TemporalType.TIMESTAMP)
 	public Date getDataDeCadastro() {
@@ -119,6 +111,7 @@ public class Usuario extends Entidade<String> {
 	}
 
 	@Transient
+	@JsonIgnore
 	public UsuarioTipo getTipoDoUsuario() {
 		RepositoryUsuarioHibernate repositorio = Aplicacao.get().getRepositorio(RepositoryUsuario.class);
 		UsuarioTipo usuarioTipo = null;

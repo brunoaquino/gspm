@@ -20,8 +20,7 @@ public class ControladorAutenticacao extends ControladorBase {
 	@RequestMapping(value = "/autentica", method = RequestMethod.POST)
 	@Transactional
 	public Usuario autentica(Usuario usuario) {
-		service.autenticaUsuario(usuario);
-		return usuario;
+		return service.autenticaUsuario(usuario);
 	}
 
 	@RequestMapping(value = "/logout", method = RequestMethod.POST)

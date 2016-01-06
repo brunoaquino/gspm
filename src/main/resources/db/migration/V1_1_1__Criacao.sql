@@ -15,7 +15,6 @@ CREATE TABLE IF NOT EXISTS `db_gspm`.`usuario` (
   `senha` VARCHAR(12) NOT NULL,
   `email` VARCHAR(100) NOT NULL,
   `ativo` TINYINT(4) NOT NULL DEFAULT 1,
-  `admin` TINYINT(4) NOT NULL DEFAULT 0,
   `datadecadastro` DATETIME NOT NULL,
   `datadealteracao` DATETIME NOT NULL,
   `tipo` TINYINT(4) NOT NULL,
@@ -114,7 +113,7 @@ ENGINE = InnoDB
 DEFAULT CHARACTER SET = utf8
 COLLATE = utf8_general_ci;
 
-INSERT INTO `db_gspm`.`usuario` (`idusuario`, `login`, `senha`, `email`, `ativo`, `admin`, `datadecadastro`, `datadealteracao`, `tipo`) VALUES ('475ec6070e3d4f599cac06070f45aef1', 'admin', '1', 'brunosmv2@gmail.com', '1', '1', '2015-09-11 16:17:25', '2015-09-11 16:17:25', '4');
+INSERT INTO `db_gspm`.`usuario` (`idusuario`, `login`, `senha`, `email`, `ativo`, `datadecadastro`, `datadealteracao`, `tipo`) VALUES ('475ec6070e3d4f599cac06070f45aef1', 'admin', '1', 'brunosmv2@gmail.com', '1', '2015-09-11 16:17:25', '2015-09-11 16:17:25', '4');
 INSERT INTO `db_gspm`.`administrador` (`idadministrador`, `idusuario`, `nome`) VALUES ('63a1cdc89e9a42d7a90a3aafe33e426d', '475ec6070e3d4f599cac06070f45aef1', 'Bruno Carvalho de Aquino');
 
 SET SQL_MODE=@OLD_SQL_MODE;
