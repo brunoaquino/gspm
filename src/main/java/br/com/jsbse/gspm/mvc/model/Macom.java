@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -29,6 +30,7 @@ public class Macom extends Entidade<String> implements UsuarioTipo {
 		return super.getId();
 	}
 
+	@Column(name = "resgistro")
 	public int getRegistro() {
 		return registro;
 	}
@@ -38,6 +40,7 @@ public class Macom extends Entidade<String> implements UsuarioTipo {
 	}
 
 	@OneToOne
+	@JoinColumn(name = "idpessoa")
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -47,6 +50,7 @@ public class Macom extends Entidade<String> implements UsuarioTipo {
 	}
 
 	@OneToOne
+	@JoinColumn(name = "idusuario")
 	public Usuario getUsuario() {
 		return usuario;
 	}

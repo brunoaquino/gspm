@@ -26,21 +26,21 @@ public class FiltroRequisicao implements Filter {
 	}
 
 	@Override
-	public void doFilter(ServletRequest request,ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
+	public void doFilter(ServletRequest request, ServletResponse servletResponse, FilterChain chain) throws IOException, ServletException {
 		HttpServletRequest req = (HttpServletRequest) request;
 		HttpServletResponse resp = (HttpServletResponse) servletResponse;
 
 		String urlDeAcesso = req.getRequestURI();
-		if(urlDeAcesso.equals("/gspm/")){
-			if(isUsuarioLogado(req)){
+		if (urlDeAcesso.equals("/gspm/")) {
+			if (isUsuarioLogado(req)) {
 				resp.sendRedirect("views/dm/index.jsp");
 				return;
-			}else{
+			} else {
 				resp.sendRedirect("views/login.jsp");
 				return;
 			}
 		}
-		
+
 		if (urlDeAcesso.contains("/resources/") || urlDeAcesso.contains("/rest")) {
 			chain.doFilter(request, resp);
 			return;

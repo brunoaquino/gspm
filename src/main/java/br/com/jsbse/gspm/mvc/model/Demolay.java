@@ -4,6 +4,7 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -16,7 +17,7 @@ import br.com.jsbse.gspm.mvc.model.interfaces.UsuarioTipo;
 @Table(name = "demolay")
 public class Demolay extends Entidade<String> implements UsuarioTipo {
 
-	private int registro;
+	private int idDm;
 	private Pessoa pessoa;
 	private Usuario usuario;
 
@@ -29,15 +30,8 @@ public class Demolay extends Entidade<String> implements UsuarioTipo {
 		return super.getId();
 	}
 
-	public int getRegistro() {
-		return registro;
-	}
-
-	public void setRegistro(int registro) {
-		this.registro = registro;
-	}
-
 	@OneToOne
+	@JoinColumn(name = "idpessoa")
 	public Pessoa getPessoa() {
 		return pessoa;
 	}
@@ -47,12 +41,22 @@ public class Demolay extends Entidade<String> implements UsuarioTipo {
 	}
 
 	@OneToOne
+	@JoinColumn(name = "idusuario")
 	public Usuario getUsuario() {
 		return usuario;
 	}
 
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
+	}
+
+	@Column(name = "iddm")
+	public int getIdDm() {
+		return idDm;
+	}
+
+	public void setIdDm(int idDm) {
+		this.idDm = idDm;
 	}
 
 }

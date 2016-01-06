@@ -9,11 +9,17 @@ import javax.persistence.Id;
 import javax.persistence.Table;
 import javax.persistence.Temporal;
 import javax.persistence.TemporalType;
+import javax.persistence.Transient;
 
 import org.hibernate.annotations.GenericGenerator;
+import org.hibernate.annotations.Type;
 
 import br.com.jsbse.arquitetura.entidade.Entidade;
+import br.com.jsbse.gspm.mvc.model.interfaces.UsuarioTipo;
+import br.com.jsbse.gspm.mvc.repositories.RepositoryUsuario;
+import br.com.jsbse.gspm.mvc.repositories.RepositoryUsuarioHibernate;
 import br.com.jsbse.gspm.mvc.tipos.TipoUsuario;
+import br.com.jsbse.jsbse.aplicacao.Aplicacao;
 
 @Entity
 @Table(name = "usuario")
@@ -103,6 +109,7 @@ public class Usuario extends Entidade<String> {
 	}
 
 	@Column(name = "tipo")
+	@Type(type = "br.com.jsbse.gspm.mvc.tipos.usertype.TipoUsuarioUserType")
 	public TipoUsuario getTipo() {
 		return tipo;
 	}
@@ -111,17 +118,22 @@ public class Usuario extends Entidade<String> {
 		this.tipo = tipo;
 	}
 
-	public br.com.jsbse.gspm.mvc.model.interfaces.UsuarioTipo getTipoDoUsuario() {
+	@Transient
+	public UsuarioTipo getTipoDoUsuario() {
+		RepositoryUsuarioHibernate repositorio = Aplicacao.get().getRepositorio(RepositoryUsuario.class);
+		UsuarioTipo usuarioTipo = null;
 		if (getTipo() == TipoUsuario.DEMOLAY) {
-
+			usuarioTipo = repositorio.getDemolayPeloUsuario(this);
 		}
 		if (getTipo() == TipoUsuario.FILHA_DE_JO) {
-
+			usuarioTipo = repositorio.getFilhaDeJoPeloUsuario(this);
 		}
 		if (getTipo() == TipoUsuario.MACOM) {
-
+			usuarioTipo = repositorio.getMacomPeloUsuario(this);
 		}
-		return new Demolay();
+		if (getTipo() == TipoUsuario.ADMINISTRADOR) {
+			usuarioTipo = repositorio.getAdministradorPeloUsuario(this);
+		}
+		return usuarioTipo;
 	}
-
 }

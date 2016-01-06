@@ -20,7 +20,6 @@ public class ServicoUsuario extends ServicoBase {
 
 	public Usuario autenticaUsuario(Usuario usuario) {
 		Usuario usuarioAutenticado = getRepositorioUsuario().getUsuarioPeloLoginESenha(usuario);
-
 		if (usuarioAutenticado == null) {
 			acrescentaMensagemDeErro("Login ou Senha inválido");
 		}
